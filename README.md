@@ -4,6 +4,12 @@
 
 Calculates and tracks next respawn time for field boss BAMs: Ortan, Cerrus, Hazard
 
+# Changelog
+
+**1.5*** added German Translation ~ Thanks to @Owyn for this awesome script.
+
+**1.0*** Owyn's original Version
+
 
 # Important Notes 
 
@@ -12,4 +18,4 @@ Calculates and tracks next respawn time for field boss BAMs: Ortan, Cerrus, Haza
 
 # Commands
 
-- `bamtime` - to show list of field bosses and their known status
+- `worldboss` - to show list of field bosses and their known status
