@@ -63,27 +63,27 @@ module.exports = function field_boss_time(mod) {
 			//console.log(msg);
 			changed = true;
 			let name = getBamName(msg.tokens.npcName);
-			bams[name] = "Alive".clr("32CD32");
-			command.message("Field Boss " + name.clr("56B4E9") + " appeared".clr("32CD32"));
+			bams[name] = "lebt noch.".clr("32CD32");
+			command.message("Worldboss " + name.clr("56B4E9") + " ist gespawnt.".clr("32CD32"));
 		}
 		else if(msg.id === 'SMT_FIELDBOSS_DIE_GUILD' || msg.id === 'SMT_FIELDBOSS_DIE_NOGUILD')
 		{
 			//console.log(msg);
 			changed = true;
 			let name = getBamName(msg.tokens.npcname);
-			command.message("Field Boss " + name.clr("56B4E9") + " was " + "killed".clr("DC143C") + " by " + msg.tokens.userName);
+			command.message("Worldboss " + name.clr("56B4E9") + " wurde " + "gekillt".clr("DC143C") + " von " + msg.tokens.userName);
 			let now = new Date();
 			let nextTime = new Date(now.getTime() + 5*60*60000); // in 5 hours
 			let nextTimeHuman = addZero(nextTime.getHours()) + ":" + addZero(nextTime.getMinutes());
-			bams[name] = "Respawns on " + nextTimeHuman.clr("E69F00");
-			console.log(name + ": " + "Respawns on: " + nextTimeHuman);
+			bams[name] = "Respawn um " + nextTimeHuman.clr("E69F00");
+			console.log(name + ": " + "Respawn um: " + nextTimeHuman);
 			command.message(name + ": " + bams[name]);
 		}
 	});
 
-	command.add('bamtime', () => {
+	command.add('worldboss', () => {
 		command.message("Ortan: ".clr("56B4E9") + bams.Ortan);
-		command.message("Cerrus: ".clr("56B4E9") + bams.Cerrus);
-		command.message("Hazard: ".clr("56B4E9") + bams.Hazard);
+		command.message("Kelros: ".clr("56B4E9") + bams.Cerrus);
+		command.message("Hazarr: ".clr("56B4E9") + bams.Hazard);
 	})
 }
