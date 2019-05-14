@@ -7,6 +7,8 @@ module.exports = function field_boss_time(mod) {
 	
 	const command = mod.command;
 	
+	const thirty_minutes = 30 * 60 * 1000;
+	
 	var bams = require('./saved.json'),
 		changed = false;
 				
@@ -15,8 +17,8 @@ module.exports = function field_boss_time(mod) {
 		switch (id)
 		{
 			case "@creature:26#5001": return "Ortan";
-			case "@creature:51#4001": return "Cerrus";
-			case "@creature:39#501": return "Hazard";
+			case "@creature:51#4001": return "Kelros";
+			case "@creature:39#501": return "Hazarr";
 			default: return "John Cena";
 		}
 	}
@@ -47,12 +49,12 @@ module.exports = function field_boss_time(mod) {
 	}
 			
 	process.on('exit', ()=> {
-		console.log('Saving field-boss times to the save file...');
+		console.log('Speichert Worldboss Zeiten in die Save Datei...');
 		saveJson(bams);
 	});
 	
 	this.destructor = function() {
-		console.log('Destructor: Saving field-boss times to the save file...');
+		console.log('Destructor: Speichert Worldboss Zeiten in die Save Datei...');
 		saveJson(bams);
 	}
 	
@@ -63,27 +65,38 @@ module.exports = function field_boss_time(mod) {
 			//console.log(msg);
 			changed = true;
 			let name = getBamName(msg.tokens.npcName);
-			bams[name] = "lebt noch.".clr("32CD32");
-			command.message("Worldboss " + name.clr("56B4E9") + " ist gespawnt.".clr("32CD32"));
+			bams[name] = "Lebt noch.".clr("32CD32");
+			command.message("Worldboss " + name.clr("56B4E9") + " ist gespawned.".clr("32CD32"));
 		}
-		else if(msg.id === 'SMT_FIELDBOSS_DIE_GUILD' || msg.id === 'SMT_FIELDBOSS_DIE_NOGUILD')
+		else if(msg.id === 'SMT_FIELDBOSS_DIE_GUILD' || msg.id === 'SMT_FIELDBOSS_DIE_NOGUILD')	
 		{
 			//console.log(msg);
 			changed = true;
 			let name = getBamName(msg.tokens.npcname);
-			command.message("Worldboss " + name.clr("56B4E9") + " wurde " + "gekillt".clr("DC143C") + " von " + msg.tokens.userName);
-			let now = new Date();
-			let nextTime = new Date(now.getTime() + 5*60*60000); // in 5 hours
-			let nextTimeHuman = addZero(nextTime.getHours()) + ":" + addZero(nextTime.getMinutes());
-			bams[name] = "Respawn um " + nextTimeHuman.clr("E69F00");
-			console.log(name + ": " + "Respawn um: " + nextTimeHuman);
-			command.message(name + ": " + bams[name]);
+			command.message("Worldboss " + name.clr("56B4E9") + " wurde " + "gekillt".clr("DC143C") + " von " + msg.tokens.userName.clr("FDD017"));
+			bams[name] = Date.now() + 5*60*60000 + (30 * 60 * 1000);
+			command.message(name + ": " + makeText(bams[name]));
 		}
 	});
+	
+	function makeText(date)
+	{
+		if(isNaN(date))
+		{
+			return date;
+		}
+		if(date < Date.now())
+		{
+			return "?";
+		}
+		let startT = new Date(date - (60 * 60 * 1000));
+		let endT = new Date(date);
+		return "Respawn um " + (addZero(startT.getHours()) + ":" + addZero(startT.getMinutes())).clr("E69F00") + " - " + (addZero(endT.getHours()) + ":" + addZero(endT.getMinutes())).clr("E69F00");
+	}
 
-	command.add('worldboss', () => {
-		command.message("Ortan: ".clr("56B4E9") + bams.Ortan);
-		command.message("Kelros: ".clr("56B4E9") + bams.Cerrus);
-		command.message("Hazarr: ".clr("56B4E9") + bams.Hazard);
+	command.add('Worldboss', () => {
+		command.message("Ortan: ".clr("56B4E9") + makeText(bams.Ortan));
+		command.message("Kelros: ".clr("56B4E9") + makeText(bams.Kelros));
+		command.message("Hazarr: ".clr("56B4E9") + makeText(bams.Hazarr));
 	})
 }
