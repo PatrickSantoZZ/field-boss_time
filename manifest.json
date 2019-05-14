@@ -1,11 +1,11 @@
 {
     "files": {
         "README.md": "6a6d81aff6746e167032672c99d2932df1d881d632c0fbff6dc6325a033209b1",
-        "index.js": "2eff17c5e54b03dafc43321fd7990d89e280aba589337b541993932fac3e3a4a",
-        "module.json": "120e86697c74bedade5b304f0b790110257147c97ca448121c1b75d3a9a4f075",
+        "index.js": "e923f3267187573d821af28928669bfa3d4a3332a6762db6e491b4a8336f0173",
+        "module.json": "ba7be05c5ab175307bd206181294271168c233654be107db51a412835c7f60a9",
         "saved.json": {
             "overwrite": false,
-            "hash": "3d479a6ae111f61c56b4fe586fe5cdd24da625dbe8f75bde3215b0cb51e719cb"
+            "hash": "4675e4bd73038d22f6fbe2e5bee97eb821188ffd282bd598569ce3135035a6f4"
         }
     },
     "defs": {

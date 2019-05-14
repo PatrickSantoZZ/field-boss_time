@@ -2,7 +2,7 @@
     "disableAutoUpdate": false,
     "name": "field-boss_time",
     "author": "Owyn | Nekonekoo",
-    "version": "1.5",
+    "version": "2.0",
     "description": "Calculates and tracks next respawn time for field boss BAMs: Ortan, Cerrus, Hazard",
     "options": {
         "niceName": "Field-Boss Time",
